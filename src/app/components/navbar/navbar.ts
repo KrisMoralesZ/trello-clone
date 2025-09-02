@@ -1,9 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { Button } from '../button/button';
 
 @Component({
   selector: 'app-navbar',
-  imports: [Button],
+  imports: [CommonModule, OverlayModule, Button],
   templateUrl: './navbar.html',
 })
-export class Navbar {}
+export class Navbar {
+  isOpen = false;
+}
