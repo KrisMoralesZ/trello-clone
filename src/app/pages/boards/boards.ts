@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { Navbar } from '../../components/navbar/navbar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-boards',
-  imports: [],
-  templateUrl: './boards.html'
+  imports: [CommonModule, Navbar],
+  templateUrl: './boards.html',
 })
-export class Boards {
-
-}
+export class Boards {}
