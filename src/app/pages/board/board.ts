@@ -4,6 +4,7 @@ import {
   DragDropModule,
   CdkDragDrop,
   moveItemInArray,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { ToDo } from '../../models/todo.model';
 import { Navbar } from '../../components/navbar/navbar';
@@ -23,13 +24,32 @@ export class Board {
       id: '2',
       title: 'Buy a unicorn',
     },
+  ];
+
+  doing: ToDo[] = [
     {
-      id: '2',
+      id: '3',
       title: 'Watch Angular Path in Platzi',
     },
   ];
 
+  done: ToDo[] = [
+    {
+      id: '4',
+      title: 'Play video games',
+    },
+  ];
+
   drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }
