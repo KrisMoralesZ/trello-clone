@@ -6,7 +6,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { ToDo } from '../../models/todo.model';
+import { Column } from '../../models/boards.model';
 import { Navbar } from '../../components/navbar/navbar';
 
 @Component({
@@ -15,34 +15,55 @@ import { Navbar } from '../../components/navbar/navbar';
   templateUrl: './board.html',
 })
 export class Board {
-  todos: ToDo[] = [
+  columns: Column[] = [
     {
-      id: '1',
-      title: 'Make dishes',
+      columnTitle: 'To Do',
+      item: [
+        {
+          id: 1,
+          title: 'Make dishes',
+        },
+        {
+          id: 2,
+          title: 'Buy a unicorn',
+        },
+      ],
     },
     {
-      id: '2',
-      title: 'Buy a unicorn',
+      columnTitle: 'In Progress',
+      item: [
+        {
+          id: 1,
+          title: 'Make dishes',
+        },
+        {
+          id: 2,
+          title: 'Buy a unicorn',
+        },
+      ],
     },
-  ];
-
-  doing: ToDo[] = [
     {
-      id: '3',
-      title: 'Watch Angular Path in Platzi',
-    },
-  ];
-
-  done: ToDo[] = [
-    {
-      id: '4',
-      title: 'Play video games',
+      columnTitle: 'Done',
+      item: [
+        {
+          id: 1,
+          title: 'Make dishes',
+        },
+        {
+          id: 2,
+          title: 'Buy a unicorn',
+        },
+      ],
     },
   ];
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -51,5 +72,12 @@ export class Board {
         event.currentIndex
       );
     }
+  }
+
+  addColumn() {
+    this.columns.push({
+      columnTitle: 'New Column',
+      item: [],
+    });
   }
 }
