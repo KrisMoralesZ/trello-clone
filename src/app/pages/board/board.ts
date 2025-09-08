@@ -6,12 +6,14 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { Column } from '../../models/boards.model';
 import { Navbar } from '../../components/navbar/navbar';
+import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, DragDropModule, Navbar],
+  imports: [CommonModule, DragDropModule, Navbar, DialogModule, Modal],
   templateUrl: './board.html',
 })
 export class Board {
@@ -78,6 +80,15 @@ export class Board {
     this.columns.push({
       columnTitle: 'New Column',
       item: [],
+    });
+  }
+
+  constructor(private dialog: Dialog) {}
+
+  openModal() {
+    this.dialog.open(Modal, {
+      minWidth: '300px',
+      maxWidth: '50%',
     });
   }
 }
