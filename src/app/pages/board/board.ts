@@ -7,13 +7,14 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { Item } from './../../models/boards.model';
 import { Column } from '../../models/boards.model';
 import { Navbar } from '../../components/navbar/navbar';
 import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, DragDropModule, Navbar, DialogModule, Modal],
+  imports: [CommonModule, DragDropModule, Navbar, DialogModule],
   templateUrl: './board.html',
 })
 export class Board {
@@ -85,10 +86,11 @@ export class Board {
 
   constructor(private dialog: Dialog) {}
 
-  openModal() {
+  openModal(item: Item) {
     this.dialog.open(Modal, {
       minWidth: '300px',
       maxWidth: '50%',
+      data: { item },
     });
   }
 }

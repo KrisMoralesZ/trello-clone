@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogRef } from '@angular/cdk/dialog';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -13,6 +13,7 @@ import {
   faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '../button/button';
+import { Item } from '../../models/boards.model';
 
 @Component({
   selector: 'app-modal',
@@ -28,9 +29,16 @@ export class Modal {
   faCheckSquare = faCheckSquare;
   faClock = faClock;
 
-  constructor(private modalRef: DialogRef) {}
+  modalData: Item;
 
-  closeModal() {
-    this.modalRef.close();
+  constructor(
+    private modalRef: DialogRef<{ response: boolean }>,
+    @Inject(DIALOG_DATA) data: { item: Item }
+  ) {
+    this.modalData = data.item;
+  }
+
+  closeModal(response: boolean = false) {
+    this.modalRef.close({ response });
   }
 }
