@@ -28,6 +28,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y chromium-browser || sudo apt-get install -y chromium
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Lint
         run: npx ng lint --fix=false
 
@@ -38,3 +40,6 @@ jobs:
         run: npm run test -- --watch=false --browsers=ChromeHeadless
         env:
           CHROME_BIN: /usr/bin/chromium
+
+      - name: Run E2E Tests
+        run: npx playwright test
