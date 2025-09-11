@@ -33,5 +33,8 @@ jobs:
         env:
           CHROME_BIN: /usr/bin/chromium
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - name: Run E2E Tests
         run: npx playwright test
