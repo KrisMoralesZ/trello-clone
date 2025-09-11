@@ -2,9 +2,9 @@ name: Angular CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -18,10 +18,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser || sudo apt-get install -y chromium
 
       - name: Lint
         run: npx ng lint --fix=false
@@ -31,3 +36,5 @@ jobs:
 
       - name: Run Unit Tests
         run: npm run test -- --watch=false --browsers=ChromeHeadless
+        env:
+          CHROME_BIN: /usr/bin/chromium
