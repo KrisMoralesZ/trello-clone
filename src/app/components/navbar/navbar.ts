@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Button } from '../button/button';
+import { Button } from '@components/button/button';
 
 @Component({
   selector: 'app-navbar',
