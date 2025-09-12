@@ -23,8 +23,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
-                "src/favicon.ico",
-                "src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -82,12 +82,23 @@
                 "glob": "**/*",
                 "input": "public"
               },
-                "src/favicon.ico",
-                "src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ]
+          }
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "trello-clone:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "trello-clone:serve:production"
+            }
           }
         }
       }
