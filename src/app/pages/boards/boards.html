@@ -18,6 +18,49 @@
         >
       </li>
     </ul>
+    <cdk-accordion>
+      <cdk-accordion-item #accordionMenu="cdkAccordionItem">
+        <button
+          class="w-full py-1 px-2 flex justify-between items-center"
+          type="button"
+          (click)="accordionMenu.toggle()"
+        >
+          My workspace
+          <fa-icon
+            [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown"
+          ></fa-icon>
+        </button>
+        <div [style.display]="accordionMenu.expanded ? '' : 'none'">
+          <ul class="ml-2 flex flex-col text-sm text-gray-700">
+            <li>
+              <a class="block py-1 px-3"
+                ><fa-icon [icon]="faTrello"></fa-icon> Boards</a
+              >
+            </li>
+            <li>
+              <a class="block py-1 px-3"
+                ><fa-icon [icon]="faHeart"></fa-icon> Highlights</a
+              >
+            </li>
+            <li>
+              <a class="block py-1 px-3"
+                ><fa-icon [icon]="faBorderAll"></fa-icon> Views</a
+              >
+            </li>
+            <li>
+              <a class="block py-1 px-3"
+                ><fa-icon [icon]="faUsers"></fa-icon> Members</a
+              >
+            </li>
+            <li>
+              <a class="block py-1 px-3"
+                ><fa-icon [icon]="faGear"></fa-icon> Settings</a
+              >
+            </li>
+          </ul>
+        </div>
+      </cdk-accordion-item>
+    </cdk-accordion>
   </div>
   <div class="w-full">
     <h1 class="text-lg font-bold mb-4">
