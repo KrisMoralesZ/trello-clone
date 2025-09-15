@@ -6,9 +6,8 @@ import {
   faBell,
   faInfoCircle,
   faClose,
-  faIcons,
 } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '../button/button';
+import { Button } from '@components/button/button';
 
 @Component({
   selector: 'app-navbar',
