@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { AuthService } from '@services/auth-service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { RequestStatus } from '@models/status.model';
 
 @Component({
   selector: 'app-login',
-  imports: [Button, ReactiveFormsModule, FontAwesomeModule],
+  imports: [CommonModule, Button, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './login.html',
 })
 export class Login {
@@ -56,7 +57,6 @@ export class Login {
           next: () => {
             this.status = 'success';
             this.router.navigate(['/app']);
-            console.log('Login successful');
           },
           error: () => {
             this.status = 'failed';

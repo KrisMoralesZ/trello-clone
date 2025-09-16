@@ -8,31 +8,32 @@
       <div
         class="flex grow items-start w-full h-full overflow-x-scroll"
         cdkDropListGroup
-      >
-        <div
-          class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0"
-          *ngFor="let column of columns"
         >
-          <div class="flex justify-between py-1">
-            <h3 class="text-sm font-bold ml-2">{{ column.columnTitle }}</h3>
-          </div>
-
+        @for (column of columns; track column) {
           <div
-            class="text-sm mt-2 min-h-[2.5rem]"
-            cdkDropList
-            (cdkDropListDropped)="drop($event)"
-            [cdkDropListData]="column.item"
-          >
-            <div
-              (click)="openModal(item)"
-              *ngFor="let item of column.item"
-              cdkDrag
-              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+            class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0"
             >
-              {{ item.title }}
+            <div class="flex justify-between py-1">
+              <h3 class="text-sm font-bold ml-2">{{ column.columnTitle }}</h3>
+            </div>
+            <div
+              class="text-sm mt-2 min-h-[2.5rem]"
+              cdkDropList
+              (cdkDropListDropped)="drop($event)"
+              [cdkDropListData]="column.item"
+              >
+              @for (item of column.item; track item) {
+                <div
+                  (click)="openModal(item)"
+                  cdkDrag
+                  class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+                  >
+                  {{ item.title }}
+                </div>
+              }
             </div>
           </div>
-        </div>
+        }
         <button class="shrink-0" (click)="addColumn()">Add Column</button>
       </div>
     </div>

@@ -50,22 +50,20 @@
                 <fa-icon [icon]="faPen"></fa-icon>
               </button>
             </div>
-            <div
-              *ngIf="form.controls.email.touched && form.controls.email.invalid"
-            >
-              <p
-                *ngIf="form.controls.email.hasError('required')"
-                class="font-medium text-red-500 text-xs mt-1 ml-1"
-              >
+            @if (form.controls['email'].touched &&
+            form.controls['email'].invalid) {
+            <div>
+              @if (form.controls['email'].hasError('required')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                 This field is mandatory
               </p>
-              <p
-                *ngIf="form.controls.email.hasError('email')"
-                class="font-medium text-red-500 text-xs mt-1 ml-1"
-              >
+              } @if (form.controls['email'].hasError('email')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                 This field should be a email
               </p>
+              }
             </div>
+            }
           </div>
           <div>
             <div class="relative">
@@ -83,54 +81,52 @@
                 <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
               </button>
             </div>
-            <div
-              *ngIf="
-                form.controls.password.touched && form.controls.password.invalid
-              "
-            >
-              <p
-                *ngIf="form.controls.password.hasError('required')"
-                class="font-medium text-red-500 text-xs mt-1 ml-1"
-              >
+            @if ( form.controls['password'].touched &&
+            form.controls['password'].invalid ) {
+            <div>
+              @if (form.controls['password'].hasError('required')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                 This field is mandatory
               </p>
-              <p
-                *ngIf="form.controls.password.hasError('minlength')"
-                class="font-medium text-red-500 text-xs mt-1 ml-1"
-              >
+              } @if (form.controls['password'].hasError('minlength')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                 This field should be greater than 6 characters
               </p>
+              }
             </div>
+            }
           </div>
-          <div *ngIf="status === 'failed'">
+          @if (status === 'failed') {
+          <div>
             <p class="font-medium text-red-500 text-xs mt-1 ml-1">
               Credentials are invalid
             </p>
           </div>
+          }
           <div>
             <app-button typeBtn="submit" color="success">Login</app-button>
           </div>
         </form>
 
         <!-- <form novalidate class="space-y-4">
-          <div class="relative">
-            <input
-              placeholder="Enter email"
-              type="email"
-              class="w-full rounded bg-gray-100 border-2 border-gray-300"
+        <div class="relative">
+          <input
+            placeholder="Enter email"
+            type="email"
+            class="w-full rounded bg-gray-100 border-2 border-gray-300"
             />
-          </div>
-          <div class="relative">
-            <input
-              placeholder="Enter password"
-              type="password"
-              class="w-full rounded bg-gray-100 border-gray-300"
+        </div>
+        <div class="relative">
+          <input
+            placeholder="Enter password"
+            type="password"
+            class="w-full rounded bg-gray-100 border-gray-300"
             />
-          </div>
-          <div>
-            <app-button typeButton="submit">Log In</app-button>
-          </div>
-        </form> -->
+        </div>
+        <div>
+          <app-button typeButton="submit">Log In</app-button>
+        </div>
+      </form> -->
         <hr class="my-4 border-b-1 border-r-gray-300" />
         <div
           class="flex justify-center items-center space-x-0 space-y-2 md:space-x-2 md:space-y-0 gap-"
