@@ -2,12 +2,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Login } from './login';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { AuthService } from '@services/auth-service';
 
 @Component({
   selector: 'app-button',
+  standalone: true,
   template: '<button><ng-content></ng-content></button>',
 })
 class MockButtonComponent {}
+class MockAuthService {
+  loginUser() {
+    return { subscribe: () => {} };
+  }
+}
 
 describe('Login', () => {
   let component: Login;
@@ -16,6 +23,7 @@ describe('Login', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Login, MockButtonComponent],
+      providers: [{ provide: AuthService, useClass: MockAuthService }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Login);
@@ -43,7 +51,7 @@ describe('Login', () => {
   it('should render the submit button', () => {
     const button = fixture.debugElement.query(By.css('app-button'));
     expect(button).toBeTruthy();
-    expect(button.nativeElement.textContent).toContain('Log In');
+    expect(button.nativeElement.textContent).toContain('Login');
   });
 
   it('should have forgot password and register links', () => {
