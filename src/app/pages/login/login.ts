@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@services/auth/auth-service';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,11 +26,11 @@ export class Login {
 
   form: ReturnType<FormBuilder['group']>;
 
-  constructor(
-    authService: AuthService,
-    router: Router,
-    formBuilder: FormBuilder
-  ) {
+  constructor() {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+    const formBuilder = inject(FormBuilder);
+
     this.authService = authService;
     this.router = router;
     this.formBuilder = formBuilder;

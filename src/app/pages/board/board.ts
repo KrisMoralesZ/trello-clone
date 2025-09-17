@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   DragDropModule,
   CdkDragDrop,
@@ -18,6 +18,8 @@ import { Modal } from '../../components/modal/modal';
   templateUrl: './board.html',
 })
 export class Board {
+  private dialog = inject(Dialog);
+
   columns: Column[] = [
     {
       columnTitle: 'To Do',
@@ -83,8 +85,6 @@ export class Board {
       item: [],
     });
   }
-
-  constructor(private dialog: Dialog) {}
 
   openModal(item: Item) {
     this.dialog.open(Modal, {
