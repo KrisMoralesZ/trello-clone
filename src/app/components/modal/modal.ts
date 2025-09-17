@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -17,7 +17,7 @@ import { Item } from '../../models/boards.model';
 
 @Component({
   selector: 'app-modal',
-  imports: [CommonModule, DialogModule, FontAwesomeModule, Button],
+  imports: [DialogModule, FontAwesomeModule, Button],
   templateUrl: './modal.html',
 })
 export class Modal {

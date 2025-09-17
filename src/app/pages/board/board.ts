@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import {
   DragDropModule,
@@ -14,7 +14,7 @@ import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, DragDropModule, Navbar, DialogModule],
+  imports: [DragDropModule, Navbar, DialogModule],
   templateUrl: './board.html',
 })
 export class Board {
