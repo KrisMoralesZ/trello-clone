@@ -2,7 +2,8 @@
   <div class="relative w-full sm:w-7/12 md:w-6/12 lg:w-4/12 m-auto">
     <div class="bg-white rounded sm:shadow-lg py-4 px-4 md:px-9">
       <div class="mb-4">
-        <div *ngIf="!showRegister">
+        @if (!showRegister) {
+        <div>
           <h1 class="text-center font-bold py-2 text-gray-700">
             Enter your data
           </h1>
@@ -23,39 +24,33 @@
                   class="w-full rounded bg-gray-100 border-gray-300 border-2"
                 />
               </div>
-              <div
-                *ngIf="
-                  formUser.controls.email.touched &&
-                  formUser.controls.email.invalid
-                "
-              >
-                <p
-                  *ngIf="formUser.controls.email.hasError('required')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+              @if ( formUser.controls['email'].touched &&
+              formUser.controls['email'].invalid ) {
+              <div>
+                @if (formUser.controls['email'].hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field is mandatory
                 </p>
-                <p
-                  *ngIf="formUser.controls.email.hasError('email')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+                } @if (formUser.controls['email'].hasError('email')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field should be a email
                 </p>
+                }
               </div>
+              }
             </div>
-
             <div>
-              <app-btn
+              <app-button
                 typeBtn="submit"
                 color="success"
                 [loading]="statusUser === 'loading'"
-                >Continue</app-btn
+                >Continue</app-button
               >
             </div>
           </form>
         </div>
-
-        <div *ngIf="showRegister">
+        } @if (showRegister) {
+        <div>
           <h1 class="text-center font-bold py-2 text-gray-700">
             Enter your data
           </h1>
@@ -63,7 +58,7 @@
             [formGroup]="form"
             novalidate
             class="space-y-4"
-            (ngSubmit)="register()"
+            (ngSubmit)="signUpUser()"
           >
             <div>
               <div class="relative">
@@ -75,16 +70,16 @@
                   class="w-full rounded bg-gray-100 border-gray-300 border-2"
                 />
               </div>
-              <div
-                *ngIf="form.controls.name.touched && form.controls.name.invalid"
-              >
-                <p
-                  *ngIf="form.controls.name.hasError('required')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+              @if (form.controls['name'].touched &&
+              form.controls['name'].invalid) {
+              <div>
+                @if (form.controls['name'].hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field is mandatory
                 </p>
+                }
               </div>
+              }
             </div>
             <div>
               <div class="relative">
@@ -98,24 +93,20 @@
                   class="w-full rounded bg-gray-100 border-gray-300 border-2"
                 />
               </div>
-              <div
-                *ngIf="
-                  form.controls.email.touched && form.controls.email.invalid
-                "
-              >
-                <p
-                  *ngIf="form.controls.email.hasError('required')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+              @if ( form.controls['email'].touched &&
+              form.controls['email'].invalid ) {
+              <div>
+                @if (form.controls['email'].hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field is mandatory
                 </p>
-                <p
-                  *ngIf="form.controls.email.hasError('email')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+                } @if (form.controls['email'].hasError('email')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field should be a email
                 </p>
+                }
               </div>
+              }
             </div>
             <div>
               <div class="relative">
@@ -133,25 +124,20 @@
                   <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
                 </button>
               </div>
-              <div
-                *ngIf="
-                  form.controls.password.touched &&
-                  form.controls.password.invalid
-                "
-              >
-                <p
-                  *ngIf="form.controls.password.hasError('required')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+              @if ( form.controls['password'].touched &&
+              form.controls['password'].invalid ) {
+              <div>
+                @if (form.controls['password'].hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field is mandatory
                 </p>
-                <p
-                  *ngIf="form.controls.password.hasError('minlength')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+                } @if (form.controls['password'].hasError('minlength')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field should be greater than 8 characters
                 </p>
+                }
               </div>
+              }
             </div>
             <div>
               <div class="relative">
@@ -162,44 +148,41 @@
                   class="w-full rounded bg-gray-100 border-gray-300 border-2"
                 />
               </div>
-              <div
-                *ngIf="
-                  form.controls.confirmPassword.touched &&
-                  form.controls.confirmPassword.invalid
-                "
-              >
-                <p
-                  *ngIf="form.controls.confirmPassword.hasError('required')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+              @if ( form.controls['confirmPassword'].touched &&
+              form.controls['confirmPassword'].invalid ) {
+              <div>
+                @if (form.controls['confirmPassword'].hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field is mandatory
                 </p>
-                <p
-                  *ngIf="form.controls.confirmPassword.hasError('minlength')"
-                  class="font-medium text-red-500 text-xs mt-1 ml-1"
-                >
+                } @if (form.controls['confirmPassword'].hasError('minlength')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                   This field should be greater than 6 characters
                 </p>
+                }
               </div>
+              }
             </div>
-            <div *ngIf="form.controls.confirmPassword.touched">
-              <p
-                *ngIf="form.hasError('mismatch')"
-                class="font-medium text-red-500 text-xs mt-1 ml-1"
-              >
+            @if (form.controls['confirmPassword'].touched) {
+            <div>
+              @if (form.hasError('mismatch')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                 The password are not the same
               </p>
+              }
             </div>
+            }
             <div>
-              <app-btn
+              <app-button
                 typeBtn="submit"
                 color="success"
                 [loading]="status === 'loading'"
-                >Register</app-btn
+                >Register</app-button
               >
             </div>
           </form>
         </div>
+        }
       </div>
       <hr class="my-4 border-b-1 border-r-gray-300" />
       <div
@@ -208,6 +191,5 @@
         <a routerLink="/login" class="text-blue-600">Return to log in</a>
       </div>
     </div>
-    <app-footer></app-footer>
   </div>
 </div>
