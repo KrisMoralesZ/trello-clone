@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AuthService } from '@services/auth-service';
+import { AuthService } from '@services/auth/auth-service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
