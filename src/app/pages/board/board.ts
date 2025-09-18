@@ -1,4 +1,3 @@
-
 import { Component, inject } from '@angular/core';
 import {
   DragDropModule,
@@ -9,12 +8,11 @@ import {
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { Item } from './../../models/boards.model';
 import { Column } from '../../models/boards.model';
-import { Navbar } from '../../components/navbar/navbar';
 import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-board',
-  imports: [DragDropModule, Navbar, DialogModule],
+  imports: [DragDropModule, DialogModule],
   templateUrl: './board.html',
 })
 export class Board {
