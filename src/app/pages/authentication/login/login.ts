@@ -58,7 +58,7 @@ export class Login {
               this.authService.setToken(response.access_token);
             }
             this.status = 'success';
-            this.router.navigate(['/app']);
+            this.router.navigate(['/app/boards']);
           },
           error: (err) => {
             this.status = 'failed';
