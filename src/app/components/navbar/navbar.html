@@ -31,7 +31,7 @@
             >
           </li>
           <li>
-            <app-button typeBtn="button" color="sky">Create</app-button>
+            <app-button typeButton="button" color="sky">Create</app-button>
           </li>
         </ul>
       </div>
@@ -117,12 +117,9 @@
     </ul>
     <ul class="py-1">
       <li>
-        <button
-          class="block py-2 px-4 text-sm text-gray-700"
-          (click)="logoutUser()"
-        >
+        <app-button typeButton="button" (click)="logoutUser()">
           Log out
-        </button>
+        </app-button>
       </li>
     </ul>
   </div>
