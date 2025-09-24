@@ -9,10 +9,12 @@ import { apiUrl } from '@services/apiUrsl';
 export class AuthService {
   private http = inject(HttpClient);
   private TOKEN_KEY = 'auth_token';
+  private refreshTokenKey = 'refresh_token';
   private apiUrl = apiUrl;
 
   setToken(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.setItem(this.refreshTokenKey, token);
   }
 
   getToken(): string | null {
@@ -21,6 +23,29 @@ export class AuthService {
 
   removeToken() {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.refreshTokenKey);
+  }
+
+  refreshToken() {
+    const token = localStorage.getItem(this.refreshTokenKey);
+    if (!token) {
+      throw new Error('No refresh token available');
+    }
+    return this.http
+      .post<{ access_token: string }>(
+        `${this.apiUrl}/api/v1/auth/refresh`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .pipe(
+        tap((response) => {
+          if (response.access_token) {
+            this.setToken(response.access_token);
+          }
+        })
+      );
   }
 
   isAuthenticated(): boolean {
