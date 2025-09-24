@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 class MockAuthService {
   isAvailable = jasmine.createSpy().and.returnValue(of({ isAvailable: true }));
   signUpAndLogin = jasmine.createSpy().and.returnValue(of({}));
+  setToken = jasmine.createSpy();
 }
 
 class MockRouter {

@@ -5,24 +5,32 @@ import {
   faBell,
   faInfoCircle,
   faClose,
+  faAngleDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@components/button/button';
 import { AuthService } from '@services/auth/auth-service';
 import { Router } from '@angular/router';
+import { UsersService } from '@services/users/users-service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [OverlayModule, FontAwesomeModule, Button],
+  imports: [OverlayModule, FontAwesomeModule, Button, AsyncPipe],
   templateUrl: './navbar.html',
 })
 export class Navbar {
   private authService = inject(AuthService);
+  private userService = inject(UsersService);
   private router = inject(Router);
   faBell = faBell;
   faInfoCircle = faInfoCircle;
   faClose = faClose;
+  faAngleDown = faAngleDown;
 
-  isOpen = false;
+  isOpenOverlayAvatar = false;
+  isOpenOverlayBoards = false;
+
+  user$ = this.userService.user$;
 
   logoutUser() {
     this.authService.removeToken();
