@@ -17,6 +17,7 @@ export class UsersTable {
   dataSource = new DataSourceUser();
   columns: string[] = ['id', 'avatar', 'name', 'email'];
   user: User | null = null;
+  users: User[] = [];
 
   ngOnInit() {
     this.getUsers();

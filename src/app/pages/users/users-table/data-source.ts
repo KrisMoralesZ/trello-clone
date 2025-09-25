@@ -25,7 +25,7 @@ export class DataSourceUser extends DataSource<User> {
       return;
     }
     const filteredData = this.originalData.filter((user) =>
-      user.username.toLowerCase().includes(filter.toLowerCase())
+      user.name.toLowerCase().includes(filter.toLowerCase())
     );
     this.data.next(filteredData);
   }
