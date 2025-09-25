@@ -8,6 +8,7 @@ import { Recovery } from '@pages/authentication/recovery/recovery';
 import { Layout } from './layout/layout';
 import { authenticationGuard } from './guards/authentication-guard';
 import { loggedUserGuard } from './guards/logged-user-guard';
+import { UsersTable } from '@pages/users/users-table/users-table';
 
 export const routes: Routes = [
   {
@@ -47,6 +48,10 @@ export const routes: Routes = [
       {
         path: 'board',
         component: Board,
+      },
+      {
+        path: 'users',
+        component: UsersTable,
       },
     ],
   },
