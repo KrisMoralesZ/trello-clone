@@ -5,7 +5,7 @@ import { Board } from './pages/board/board';
 import { Signup } from '@pages/authentication/signup/signup';
 import { PasswordReset } from '@pages/authentication/password-reset/password-reset';
 import { Recovery } from '@pages/authentication/recovery/recovery';
-import { Layout } from './layout/layout';
+import { Layout } from './components/layout/layout';
 import { authenticationGuard } from './guards/authentication-guard';
 import { loggedUserGuard } from './guards/logged-user-guard';
 import { UsersTable } from '@pages/users/users-table/users-table';
