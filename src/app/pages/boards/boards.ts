@@ -51,8 +51,11 @@ export class Boards {
   getBoards() {
     this.boardsService.getBoards().subscribe({
       next: (boards) => {
-        this.dataSource.setData(boards as IBoard[]);
-        console.log(boards);
+        this.boards = boards;
+        this.dataSource.setData(this.boards);
+      },
+      error: (err) => {
+        console.error('Error fetching boards:', err);
       },
     });
   }
