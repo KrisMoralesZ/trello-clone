@@ -46,7 +46,7 @@ export const routes: Routes = [
         component: Boards,
       },
       {
-        path: 'board',
+        path: 'boards/:id',
         component: Board,
       },
       {
