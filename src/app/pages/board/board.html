@@ -8,20 +8,19 @@
         class="flex grow items-start w-full h-full overflow-x-scroll"
         cdkDropListGroup
       >
-        @for (column of columns; track column) {
+        @for (list of board?.lists; track board?.lists) {
         <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0">
           <div class="flex justify-between py-1">
-            <h3 class="text-sm font-bold ml-2">{{ column.columnTitle }}</h3>
+            <h3 class="text-sm font-bold ml-2">{{ list.title }}</h3>
           </div>
           <div
             class="text-sm mt-2 min-h-[2.5rem]"
             cdkDropList
             (cdkDropListDropped)="drop($event)"
-            [cdkDropListData]="column.item"
+            [cdkDropListData]="list.cards"
           >
-            @for (item of column.item; track item) {
+            @for (item of list.cards; track item) {
             <div
-              (click)="openModal(item)"
               cdkDrag
               class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
             >
@@ -31,7 +30,7 @@
           </div>
         </div>
         }
-        <button class="shrink-0" (click)="addColumn()">Add Column</button>
+        <!-- <button class="shrink-0" (click)="addColumn()">Add Column</button> -->
       </div>
     </div>
   </div>
