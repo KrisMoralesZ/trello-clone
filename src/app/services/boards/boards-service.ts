@@ -13,7 +13,9 @@ export class BoardsService {
   private apiUrl = apiUrl;
 
   getBoards(): Observable<IBoard[]> {
-    const token = localStorage.getItem(this.TOKEN_KEY);
+    const token = localStorage.getItem(this.TOKEN_KEY)
+      ? localStorage.getItem(this.TOKEN_KEY)
+      : '';
     return this.http.get<IBoard[]>(`${this.apiUrl}/api/v1/boards`, {
       headers: { Authorization: `Bearer ${token}` || '' },
     });
