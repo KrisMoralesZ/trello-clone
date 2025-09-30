@@ -1,6 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Boards } from './boards';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '@services/auth/auth-service';
+import { BoardsService } from '@services/boards/boards-service';
 
 describe('Boards', () => {
   let component: Boards;
@@ -8,9 +12,9 @@ describe('Boards', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Boards]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      providers: [AuthService, BoardsService, HttpClient],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Boards);
     component = fixture.componentInstance;
