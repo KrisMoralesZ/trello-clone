@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { COLORS, Colors } from '@models/colors.model';
 
 @Component({
   selector: 'app-card-color',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card-color.html',
 })
 export class CardColor {
