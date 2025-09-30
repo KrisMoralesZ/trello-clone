@@ -6,6 +6,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { IBoard } from '@models/boards.model';
+import { BoardsService } from '@services/boards/boards-service';
 import { Item } from './../../models/boards.model';
 import { Column } from '../../models/boards.model';
 import { Modal } from '../../components/modal/modal';
@@ -17,6 +19,9 @@ import { Modal } from '../../components/modal/modal';
 })
 export class Board {
   private dialog = inject(Dialog);
+  private boardsService = inject(BoardsService);
+
+  board: IBoard | null = null;
 
   columns: Column[] = [
     {
@@ -59,6 +64,14 @@ export class Board {
       ],
     },
   ];
+
+  getBoard(id: number) {
+    this.boardsService.getBoard(id).subscribe((board) => {
+      this.board = board;
+
+      console.log('Fetched board:', this.board);
+    });
+  }
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
