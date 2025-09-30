@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   DragDropModule,
   CdkDragDrop,
@@ -6,7 +7,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { IBoard } from '@models/boards.model';
+import { IBoardDetails } from '@models/boards.model';
 import { BoardsService } from '@services/boards/boards-service';
 import { Item } from './../../models/boards.model';
 import { Column } from '../../models/boards.model';
@@ -20,8 +21,9 @@ import { Modal } from '../../components/modal/modal';
 export class Board {
   private dialog = inject(Dialog);
   private boardsService = inject(BoardsService);
+  private route = inject(ActivatedRoute);
 
-  board: IBoard | null = null;
+  board: IBoardDetails | null = null;
 
   columns: Column[] = [
     {
@@ -65,10 +67,18 @@ export class Board {
     },
   ];
 
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.getBoard(id);
+    } else {
+      console.error('Invalid board ID');
+    }
+  }
+
   getBoard(id: number) {
     this.boardsService.getBoard(id).subscribe((board) => {
       this.board = board;
-
       console.log('Fetched board:', this.board);
     });
   }
