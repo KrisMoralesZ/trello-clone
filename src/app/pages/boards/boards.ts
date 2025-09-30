@@ -14,7 +14,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
 import { BoardsService } from '@services/boards/boards-service';
-import { BoardsDataSource } from './BoardDataSource';
 import { IBoard } from '@models/boards.model';
 import { CardColor } from '@components/card-color/card-color';
 
@@ -37,23 +36,16 @@ export class Boards {
   faUsers = faUsers;
   faGear = faGear;
 
-  dataSource = new BoardsDataSource();
   boards: IBoard[] = [];
 
   ngOnInit() {
     this.getBoards();
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filterData(filterValue.trim().toLowerCase());
-  }
-
   getBoards() {
     this.boardsService.getBoards().subscribe({
       next: (boards) => {
         this.boards = boards;
-        this.dataSource.setData(this.boards);
       },
       error: (err) => {
         console.error('Error fetching boards:', err);
