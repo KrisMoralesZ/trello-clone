@@ -68,7 +68,15 @@ export class Board {
     this.dialog.open(Modal, {
       minWidth: '300px',
       maxWidth: '50%',
-      data: { cardData, board: this.board },
+      data: {
+        cardData,
+        board: this.board,
+        listData: this.board?.lists
+          ? this.board.lists.find((list) =>
+              list.cards.some((card) => card.id === cardData.id)
+            )
+          : undefined,
+      },
     });
     console.log(cardData);
   }
