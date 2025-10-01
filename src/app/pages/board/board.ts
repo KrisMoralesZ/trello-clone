@@ -26,7 +26,7 @@ export class Board {
   board: IBoardDetails | null = null;
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap?.get('id'));
     if (id) {
       this.getBoard(id);
     } else {

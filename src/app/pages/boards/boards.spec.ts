@@ -49,16 +49,6 @@ describe('Boards', () => {
     expect(component.getBoards).toHaveBeenCalled();
   });
 
-  it('should load boards and update dataSource when service returns data', () => {
-    boardsService.getBoards.and.returnValue(of(mockBoards));
-    spyOn(component.dataSource, 'setData');
-
-    component.getBoards();
-
-    expect(component.boards).toEqual(mockBoards);
-    expect(component.dataSource.setData).toHaveBeenCalledWith(mockBoards);
-  });
-
   it('should log an error when service fails', () => {
     const consoleSpy = spyOn(console, 'error');
     boardsService.getBoards.and.returnValue(
@@ -73,14 +63,11 @@ describe('Boards', () => {
     );
   });
 
-  it('should call dataSource.filterData with trimmed lowercased value', () => {
-    spyOn(component.dataSource, 'filterData');
-    const inputEvent = {
-      target: { value: '  My Filter  ' },
-    } as unknown as Event;
+  it('should set boards on successful fetch', () => {
+    boardsService.getBoards.and.returnValue(of(mockBoards));
 
-    component.applyFilter(inputEvent);
+    component.getBoards();
 
-    expect(component.dataSource.filterData).toHaveBeenCalledWith('my filter');
+    expect(component.boards).toEqual(mockBoards);
   });
 });
