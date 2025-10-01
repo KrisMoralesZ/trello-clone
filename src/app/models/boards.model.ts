@@ -1,12 +1,5 @@
-import { Card } from './cards.model';
+import { List } from './lists.model';
 import { User } from './user.model';
-
-export interface List {
-  id: number;
-  title: string;
-  position: number;
-  cards: Card[];
-}
 
 export interface IBoard {
   id: number;

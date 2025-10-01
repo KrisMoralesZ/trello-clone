@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { List } from '@models/boards.model';
 import { Modal } from '@components/modal/modal';
 import { Card } from '@models/cards.model';
+import { List } from '@models/lists.model';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {

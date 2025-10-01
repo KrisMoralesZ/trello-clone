@@ -13,8 +13,8 @@ import {
   faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '../button/button';
-import { List } from '../../models/boards.model';
 import { Card } from '@models/cards.model';
+import { List } from '@models/lists.model';
 
 @Component({
   selector: 'app-modal',
