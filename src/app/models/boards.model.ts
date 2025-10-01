@@ -1,15 +1,5 @@
 import { User } from './user.model';
 
-export interface Item {
-  id: number;
-  title: string;
-}
-
-export interface Column {
-  columnTitle: string;
-  item: Item[];
-}
-
 export interface List {
   id: number;
   title: string;
