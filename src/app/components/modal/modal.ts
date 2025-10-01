@@ -13,7 +13,7 @@ import {
   faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '../button/button';
-import { Card, Item } from '../../models/boards.model';
+import { Card } from '../../models/boards.model';
 
 @Component({
   selector: 'app-modal',
@@ -35,16 +35,14 @@ export class Modal {
   faCheckSquare = faCheckSquare;
   faClock = faClock;
 
-  modalData: Item;
-  cardData: Card | null = null;
+  cardData: Card;
 
   constructor() {
     const data = inject<{
-      item: Item;
-      card: Card;
+      cardData: Card;
     }>(DIALOG_DATA);
 
-    this.modalData = data.item;
+    this.cardData = data.cardData;
   }
 
   closeModal(response = false) {

@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { Item } from '@models/boards.model';
+import { Card } from '@models/boards.model';
 import { Modal } from '@components/modal/modal';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
   private dialog = inject(Dialog);
 
-  open(item: Item) {
+  open(cardData: Card) {
     const dialogRef = this.dialog.open(Modal, {
-      data: { item },
+      data: { cardData },
     });
 
     return dialogRef.closed;

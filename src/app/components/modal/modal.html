@@ -9,7 +9,7 @@
   <div class="flex space-x-2 mb-5">
     <fa-icon class="text-gray-800" [icon]="faCheckToSlot"></fa-icon>
     <div class="flex flex-col">
-      <h3 class="text-lg font-semibold text-gray-800">{{ modalData.title }}</h3>
+      <h3 class="text-lg font-semibold text-gray-800">{{ cardData.title }}</h3>
       <p class="text-sm text-gray-500">in list ToDo</p>
     </div>
   </div>
@@ -19,7 +19,7 @@
       <div class="flex flex-col">
         <h3 class="text-lg font-semibold text-gray-800">Description</h3>
         <p class="text-sm text-gray-500">
-          {{ cardData?.description || "Add a more detailed description..." }}
+          {{ cardData.description || "Add a more detailed description..." }}
         </p>
       </div>
     </div>
