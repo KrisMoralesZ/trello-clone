@@ -7,9 +7,10 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { Card, IBoardDetails, List } from '@models/boards.model';
+import { IBoardDetails } from '@models/boards.model';
 import { BoardsService } from '@services/boards/boards-service';
 import { Modal } from '../../components/modal/modal';
+import { Card } from '@models/cards.model';
 
 @Component({
   selector: 'app-board',
