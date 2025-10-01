@@ -8,7 +8,7 @@
         class="flex grow items-start w-full h-full overflow-x-scroll"
         cdkDropListGroup
       >
-        @for (list of board?.lists; track board?.lists) {
+        @for (list of board?.lists; track list.id) {
         <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0">
           <div class="flex justify-between py-1">
             <h3 class="text-sm font-bold ml-2">{{ list.title }}</h3>
@@ -21,6 +21,7 @@
           >
             @for (item of list.cards; track item) {
             <div
+              (click)="openModal(item)"
               cdkDrag
               class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
             >

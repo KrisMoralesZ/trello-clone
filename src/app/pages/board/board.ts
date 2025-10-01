@@ -7,10 +7,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { IBoardDetails, List } from '@models/boards.model';
+import { Card, IBoardDetails, List } from '@models/boards.model';
 import { BoardsService } from '@services/boards/boards-service';
-import { Item } from './../../models/boards.model';
-import { Column } from '../../models/boards.model';
 import { Modal } from '../../components/modal/modal';
 
 @Component({
@@ -24,6 +22,7 @@ export class Board {
   private route = inject(ActivatedRoute);
 
   board: IBoardDetails | null = null;
+  cardData: Card | null = null;
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap?.get('id'));
@@ -65,11 +64,12 @@ export class Board {
   //   });
   // }
 
-  openModal(item: Item) {
+  openModal(cardData: Card) {
     this.dialog.open(Modal, {
       minWidth: '300px',
       maxWidth: '50%',
-      data: { item },
+      data: { cardData, board: this.board },
     });
+    console.log(cardData);
   }
 }
