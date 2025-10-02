@@ -41,9 +41,9 @@ export class NewBoardForm {
       if (title && backgroundColor) {
         this.boardsService.createBoard(title, backgroundColor).subscribe({
           next: (board) => {
-            this.router.navigate([`/boards/${board.id}`]);
             this.closeNewBoardForm();
             this.form.reset();
+            this.router.navigateByUrl(`app/boards/${board.id}`);
           },
           error: (err) => {
             console.error('Error creating board:', err);
