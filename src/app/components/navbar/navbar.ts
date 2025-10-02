@@ -12,6 +12,7 @@ import { AuthService } from '@services/auth/auth-service';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { UsersService } from '@services/users/users-service';
 import { AsyncPipe } from '@angular/common';
+import { NewBoardForm } from '@components/new-board-form/new-board-form';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +22,7 @@ import { AsyncPipe } from '@angular/common';
     Button,
     AsyncPipe,
     RouterLinkWithHref,
+    NewBoardForm,
   ],
   templateUrl: './navbar.html',
 })
@@ -35,11 +37,16 @@ export class Navbar {
 
   isOpenOverlayAvatar = false;
   isOpenOverlayBoards = false;
+  isOpenOverlayCreateBoard = false;
 
   user$ = this.userService.user$;
 
   logoutUser() {
     this.authService.removeToken();
     this.router.navigate(['/login']);
+  }
+
+  closeNewBoardForm(event: boolean) {
+    this.isOpenOverlayCreateBoard = event;
   }
 }
