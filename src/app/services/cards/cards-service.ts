@@ -14,6 +14,13 @@ export class CardsService {
     ? localStorage.getItem(this.TOKEN_KEY)
     : '';
 
+  createCard(card: { title: string }) {
+    const token = this.token;
+    return this.http.post<Card>(`${this.apiUrl}/api/v1/cards`, card, {
+      headers: { Authorization: `Bearer ${token}` || '' },
+    });
+  }
+
   update(id: Card['id'], changes: UpdateCardDto) {
     const token = this.token;
     return this.http.put<Card>(`${this.apiUrl}/api/v1/cards/${id}`, changes, {
