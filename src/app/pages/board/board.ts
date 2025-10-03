@@ -12,10 +12,17 @@ import { Card } from '@models/cards.model';
 import { BoardsService } from '@services/boards/boards-service';
 import { CardsService } from '@services/cards/cards-service';
 import { Modal } from '../../components/modal/modal';
+import { Button } from '@components/button/button';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-board',
-  imports: [DragDropModule, DialogModule],
+  imports: [DragDropModule, DialogModule, Button, ReactiveFormsModule],
   templateUrl: './board.html',
 })
 export class Board {
@@ -23,9 +30,14 @@ export class Board {
   private boardsService = inject(BoardsService);
   private cardsService = inject(CardsService);
   private route = inject(ActivatedRoute);
+  private formBuilder = inject(FormBuilder);
 
   board: IBoardDetails | null = null;
   cardData: Card | null = null;
+  inputCard = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap?.get('id'));
@@ -41,6 +53,16 @@ export class Board {
       this.board = board;
       console.log('Fetched board:', this.board);
     });
+  }
+
+  createCard(listId: number, title: string) {
+    if (this.inputCard.valid && this.board) {
+      const title = this.inputCard.value;
+      this.cardsService.createCard(listId, { title }).subscribe((card) => {
+        console.log('Card created:', card);
+        this.inputCard.reset();
+      });
+    }
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -75,13 +97,6 @@ export class Board {
         console.log('Card updated:', updatedCard);
       });
   }
-
-  // addColumn() {
-  //   this.lists.push({
-  //     title: 'New Column',
-  //     cards: [],
-  //   });
-  // }
 
   openModal(cardData: Card) {
     this.dialog.open(Modal, {
