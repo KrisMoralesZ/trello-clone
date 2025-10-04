@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { AuthService } from '@services/auth-service';
-import { Component } from '@angular/core';
+
+import { AuthService } from '@services/auth/auth-service';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,7 +11,7 @@ import { RequestStatus } from '@models/status.model';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, Button, ReactiveFormsModule, FontAwesomeModule],
+  imports: [Button, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './login.html',
 })
 export class Login {
@@ -26,11 +26,11 @@ export class Login {
 
   form: ReturnType<FormBuilder['group']>;
 
-  constructor(
-    authService: AuthService,
-    router: Router,
-    formBuilder: FormBuilder
-  ) {
+  constructor() {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+    const formBuilder = inject(FormBuilder);
+
     this.authService = authService;
     this.router = router;
     this.formBuilder = formBuilder;

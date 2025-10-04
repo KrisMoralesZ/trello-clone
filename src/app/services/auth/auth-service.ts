@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   private http = inject(HttpClient);
+
   apiUrl = 'https://fake-trello-api.herokuapp.com/';
 
   login(email: string, password: string) {

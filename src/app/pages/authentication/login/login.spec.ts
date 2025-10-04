@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Login } from './login';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { AuthService } from '@services/auth-service';
+import { AuthService } from '@services/auth/auth-service';
 
 @Component({
   selector: 'app-button',
