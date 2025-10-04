@@ -92,6 +92,16 @@ export class Board {
       };
       this.cardsService.createCard(cardDto).subscribe((card) => {
         console.log('Card created:', card);
+        let targetList: List | undefined;
+        if (this.board && this.board.lists) {
+          targetList = this.board.lists.find(
+            (iteratorList) => iteratorList.id === list.id
+          );
+        }
+        if (targetList) {
+          targetList.cards.push(card);
+          targetList.showCardForm = false;
+        }
         this.inputCard.reset();
       });
     } else {
