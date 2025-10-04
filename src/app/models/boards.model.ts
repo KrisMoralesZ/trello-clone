@@ -10,6 +10,21 @@ export interface Column {
   item: Item[];
 }
 
+export interface List {
+  id: string;
+  title: string;
+  position: number;
+  cards: Card[];
+}
+
+export interface Card {
+  id: string;
+  title: string;
+  description: string;
+  position: number;
+  list: List;
+}
+
 export interface IBoard {
   id: number;
   title: string;
@@ -17,6 +32,6 @@ export interface IBoard {
   members: User[];
 }
 
-export interface IBoards {
-  boards: IBoard[];
+export interface IBoardDetails extends IBoard {
+  lists?: List[];
 }
