@@ -27,4 +27,11 @@ export class UsersService {
       })
       .pipe(tap((user) => this.user$.next(user)));
   }
+
+  getUsers() {
+    const token = this.autService.getToken();
+    return this.http.get<User[]>(`${this.apiUrl}/api/v1/users`, {
+      headers: { Authorization: `Bearer ${token}` || '' },
+    });
+  }
 }

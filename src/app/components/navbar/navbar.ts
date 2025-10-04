@@ -9,13 +9,19 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@components/button/button';
 import { AuthService } from '@services/auth/auth-service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { UsersService } from '@services/users/users-service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [OverlayModule, FontAwesomeModule, Button, AsyncPipe],
+  imports: [
+    OverlayModule,
+    FontAwesomeModule,
+    Button,
+    AsyncPipe,
+    RouterLinkWithHref,
+  ],
   templateUrl: './navbar.html',
 })
 export class Navbar {
