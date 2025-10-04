@@ -31,32 +31,30 @@
             }
           </div>
           <div class="mt-5">
-            <!-- <app-button
-              *ngIf="!list.showCardForm"
-              color="light"
-              (click)="openFormCard(list)"
-              >Add Board</app-button
-              > -->
-            <!-- @if (list.showCardForm) { -->
+            @if (!list.showCardForm) {
+            <app-button color="light" (click)="openCardForm(list)"
+              >Add Card</app-button
+            >
+            } @if (list.showCardForm) {
             <div class="w-full">
               <textarea [formControl]="inputCard" class="w-full"></textarea>
               <div class="flex space-x-2 justify-between">
-                <app-button
-                  color="success"
-                  (click)="createCard(list.id, inputCard.value)"
+                <app-button color="success" (click)="createCard(list)"
                   >Create</app-button
                 >
-                <!-- <app-button color="light" (click)="closeCardForm(list)"
-                      >Close</app-button
-                      > -->
+                <app-button color="light" (click)="closeCardForm(list)"
+                  >Close</app-button
+                >
               </div>
             </div>
-            <!-- } -->
+            }
           </div>
         </div>
         }
-        <!-- <button class="shrink-0" (click)="addColumn()">Add Column</button> -->
       </div>
+      <!-- <div class="mt-4">
+            <button class="shrink-0" (click)="addColumn()">Add Column</button>
+          </div> -->
     </div>
   </div>
 </div>

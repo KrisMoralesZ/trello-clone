@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -9,6 +10,7 @@ import {
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { IBoardDetails } from '@models/boards.model';
 import { Card } from '@models/cards.model';
+import { List } from '@models/lists.model';
 import { BoardsService } from '@services/boards/boards-service';
 import { CardsService } from '@services/cards/cards-service';
 import { Modal } from '../../components/modal/modal';
@@ -22,7 +24,13 @@ import {
 
 @Component({
   selector: 'app-board',
-  imports: [DragDropModule, DialogModule, Button, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    DragDropModule,
+    DialogModule,
+    Button,
+    ReactiveFormsModule,
+  ],
   templateUrl: './board.html',
 })
 export class Board {
@@ -55,13 +63,39 @@ export class Board {
     });
   }
 
-  createCard(listId: number, title: string) {
+  openCardForm(list: List) {
+    if (this.board && this.board.lists) {
+      const targetList = this.board.lists.map((iteratorList) => {
+        if (iteratorList.id === list.id) {
+          return {
+            ...iteratorList,
+            showCardForm: true,
+          };
+        }
+        return { ...iteratorList, showCardForm: false };
+      });
+      this.board.lists = targetList;
+    }
+  }
+
+  closeCardForm(list: List) {
+    list.showCardForm = false;
+  }
+
+  createCard(list: List) {
     if (this.inputCard.valid && this.board) {
-      const title = this.inputCard.value;
-      this.cardsService.createCard(listId, { title }).subscribe((card) => {
+      const cardDto = {
+        title: this.inputCard.value,
+        listId: list.id,
+        boardId: this.board.id,
+        position: this.boardsService.getPositionNewCard(list.cards),
+      };
+      this.cardsService.createCard(cardDto).subscribe((card) => {
         console.log('Card created:', card);
         this.inputCard.reset();
       });
+    } else {
+      console.error('Invalid card input or board not found');
     }
   }
 

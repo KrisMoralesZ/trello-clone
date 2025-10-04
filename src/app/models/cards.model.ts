@@ -8,6 +8,11 @@ export interface Card {
   list?: List;
 }
 
+export interface CreateCardDto extends Omit<Card, 'id' | 'list'> {
+  listId: string | number;
+  boardId: string | number;
+}
+
 export interface UpdateCardDto {
   title?: string;
   description?: string;
