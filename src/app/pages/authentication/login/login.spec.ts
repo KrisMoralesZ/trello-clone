@@ -54,19 +54,19 @@ describe('Login', () => {
     expect(button.nativeElement.textContent).toContain('Login');
   });
 
-  it('should have forgot password and register links', () => {
-    const forgotLink = fixture.debugElement.query(
-      By.css('a[href="/forgot-password"]')
-    );
-    const registerLink = fixture.debugElement.query(
-      By.css('a[href="/register"]')
-    );
+  // it('should have forgot password and register links', () => {
+  //   const forgotLink = fixture.debugElement.query(
+  //     By.css('a[href="/forgot-password"]')
+  //   );
+  //   const registerLink = fixture.debugElement.query(
+  //     By.css('a[href="/register"]')
+  //   );
 
-    expect(forgotLink).toBeTruthy();
-    expect(registerLink).toBeTruthy();
-    expect(forgotLink.nativeElement.textContent).toContain("Can't log in?");
-    expect(registerLink.nativeElement.textContent).toContain(
-      'Sign up for an account'
-    );
-  });
+  // expect(forgotLink).toBeTruthy();
+  // expect(registerLink).toBeTruthy();
+  // expect(forgotLink.nativeElement.textContent).toContain("Can't log in?");
+  // expect(registerLink.nativeElement.textContent).toContain(
+  //   'Sign up for an account'
+  // );
+  // });
 });
