@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, tap } from 'rxjs';
+import { apiUrl } from '@services/apiUrsl';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { switchMap, tap } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient);
   private TOKEN_KEY = 'auth_token';
+  private apiUrl = apiUrl;
 
   setToken(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
@@ -24,8 +26,6 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
-
-  apiUrl = 'https://fake-trello-api.herokuapp.com';
 
   login(email: string, password: string) {
     return this.http

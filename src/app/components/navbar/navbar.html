@@ -1,7 +1,8 @@
+@if (user$ | async; as user) {
 <nav class="bg-sky-700 border-gray-200 px-6 shadow-md">
   <div class="flex flex-wrap justify-between items-center">
     <div class="flex items-center">
-      <a routerLink="/">
+      <a routerLink="/app">
         <img
           loading="lazy"
           class="w-20 mr-8"
@@ -10,15 +11,27 @@
         />
       </a>
       <div class="flex items-center">
-        <ul class="flex items-center space-x-8 text-sm font-medium">
+        <ul class="flex items-center space-x-2 text-sm font-medium">
           <li>
-            <a class="block py-3 px-4 text-white">Workspaces</a>
+            <app-button
+              color="sky"
+              (click)="isOpenOverlayBoards = !isOpenOverlayBoards"
+              cdkOverlayOrigin
+              #boardsOverlay="cdkOverlayOrigin"
+            >
+              <span class="flex space-x-2 text-left">
+                <span>Boards</span>
+                <fa-icon [icon]="faAngleDown"></fa-icon>
+              </span>
+            </app-button>
           </li>
           <li>
-            <a class="block py-3 px-4 text-white">Recent</a>
+            <a routerLink="/app/users" class="block py-3 px-4 text-white"
+              >Users</a
+            >
           </li>
           <li>
-            <app-button typeButton="button">Create</app-button>
+            <app-button typeButton="button" color="sky">Create</app-button>
           </li>
         </ul>
       </div>
@@ -36,13 +49,13 @@
           class="flex rounded-full"
           aria-expanded="false"
           type="button"
-          (click)="isOpen = !isOpen"
+          (click)="isOpenOverlayAvatar = !isOpenOverlayAvatar"
           cdkOverlayOrigin
           #menuOverlay="cdkOverlayOrigin"
         >
           <img
             class="w-8 h-8 rounded-full"
-            src="https://api.lorem.space/image/face?w=400&h=400"
+            [src]="user?.avatarUrl"
             alt="user photo"
           />
         </button>
@@ -50,57 +63,53 @@
     </div>
   </div>
 </nav>
-
 <ng-template
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="menuOverlay"
-  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayOpen]="isOpenOverlayAvatar"
+  (overlayOutsideClick)="isOpenOverlayAvatar = !isOpenOverlayAvatar"
 >
   <div
     class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow"
   >
-    <div class="py-3 px-4 flex justify-between">
-      <span class="block text-sm text-center text-gray-900">Account</span>
-      <button (click)="isOpen = !isOpen" class="block text-sm text-gray-900">
+    <div class="py-2 px-4 text-center relative">
+      <span class="block text-normal text-gray-900">Account</span>
+      <button
+        (click)="isOpenOverlayAvatar = !isOpenOverlayAvatar"
+        class="block text-sm text-gray-900 absolute right-3 top-3"
+      >
         <fa-icon [icon]="faClose"></fa-icon>
       </button>
     </div>
     <div class="py-3 px-4 flex items-center space-x-4">
-      <img
-        class="w-10 h-10 rounded-full"
-        src="https://api.lorem.space/image/face?w=400&h=400"
-        alt=""
-      />
+      <img class="w-10 h-10 rounded-full" [src]="user?.avatarUrl" alt="" />
       <div class="space-y-1">
-        <div>Jese Leos</div>
-        <div class="text-sm text-gray-500">nico@gmail.com</div>
+        <div>{{ user?.username }}</div>
+        <div class="text-sm text-gray-500">{{ user?.email }}</div>
       </div>
     </div>
     <ul class="py-1">
       <li>
         <a
-          href="#"
+          routerLink="/app/profile"
           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
           >Profile</a
         >
       </li>
       <li>
         <a
-          href="#"
           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
           >Activity</a
         >
       </li>
       <li>
         <a
-          href="#"
           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
           >Cards</a
         >
       </li>
       <li>
         <a
-          href="#"
           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
           >Settings</a
         >
@@ -108,10 +117,32 @@
     </ul>
     <ul class="py-1">
       <li>
-        <app-button typeButton="button" color="danger" (click)="logoutUser()"
-          >Log out</app-button
-        >
+        <app-button typeButton="button" (click)="logoutUser()">
+          Log out
+        </app-button>
       </li>
     </ul>
   </div>
 </ng-template>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="boardsOverlay"
+  [cdkConnectedOverlayOpen]="isOpenOverlayBoards"
+  (overlayOutsideClick)="isOpenOverlayBoards = !isOpenOverlayBoards"
+>
+  <div
+    class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow"
+  >
+    <div class="py-2 px-4 text-center relative">
+      <span class="block text-normal text-gray-900">Boards</span>
+      <button
+        (click)="isOpenOverlayBoards = !isOpenOverlayBoards"
+        class="block text-sm text-gray-900 absolute right-3 top-3"
+      >
+        <fa-icon [icon]="faClose"></fa-icon>
+      </button>
+    </div>
+    <div class="py-3 px-4 flex justify-between">Content</div>
+  </div>
+</ng-template>
+}
