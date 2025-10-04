@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { AuthService } from '@services/auth/auth-service';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { RequestStatus } from '@models/status.model';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, Button, ReactiveFormsModule, FontAwesomeModule],
+  imports: [Button, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './login.html',
 })
 export class Login {
