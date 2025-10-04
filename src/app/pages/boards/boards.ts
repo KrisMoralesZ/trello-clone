@@ -16,10 +16,11 @@ import { faTrello } from '@fortawesome/free-brands-svg-icons';
 import { BoardsService } from '@services/boards/boards-service';
 import { BoardsDataSource } from './BoardDataSource';
 import { IBoard } from '@models/boards.model';
+import { CardColor } from '@components/card-color/card-color';
 
 @Component({
   selector: 'app-boards',
-  imports: [FontAwesomeModule, CdkAccordionModule],
+  imports: [FontAwesomeModule, CdkAccordionModule, CardColor],
   templateUrl: './boards.html',
 })
 export class Boards {
@@ -58,5 +59,9 @@ export class Boards {
         console.error('Error fetching boards:', err);
       },
     });
+  }
+
+  goToBoard(boardId: number) {
+    window.location.href = `/app/boards/${boardId}`;
   }
 }
