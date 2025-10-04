@@ -11,7 +11,7 @@ export interface Column {
 }
 
 export interface List {
-  id: string;
+  id: number;
   title: string;
   position: number;
   cards: Card[];
@@ -20,9 +20,9 @@ export interface List {
 export interface Card {
   id: string;
   title: string;
-  description: string;
-  position: number;
-  list: List;
+  description?: string;
+  position?: number;
+  list?: List;
 }
 
 export interface IBoard {

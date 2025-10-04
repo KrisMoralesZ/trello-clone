@@ -7,7 +7,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { IBoardDetails } from '@models/boards.model';
+import { IBoardDetails, List } from '@models/boards.model';
 import { BoardsService } from '@services/boards/boards-service';
 import { Item } from './../../models/boards.model';
 import { Column } from '../../models/boards.model';
@@ -24,48 +24,6 @@ export class Board {
   private route = inject(ActivatedRoute);
 
   board: IBoardDetails | null = null;
-
-  columns: Column[] = [
-    {
-      columnTitle: 'To Do',
-      item: [
-        {
-          id: 1,
-          title: 'Make dishes',
-        },
-        {
-          id: 2,
-          title: 'Buy a unicorn',
-        },
-      ],
-    },
-    {
-      columnTitle: 'In Progress',
-      item: [
-        {
-          id: 1,
-          title: 'Make dishes',
-        },
-        {
-          id: 2,
-          title: 'Buy a unicorn',
-        },
-      ],
-    },
-    {
-      columnTitle: 'Done',
-      item: [
-        {
-          id: 1,
-          title: 'Make dishes',
-        },
-        {
-          id: 2,
-          title: 'Buy a unicorn',
-        },
-      ],
-    },
-  ];
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap?.get('id'));
@@ -100,12 +58,12 @@ export class Board {
     }
   }
 
-  addColumn() {
-    this.columns.push({
-      columnTitle: 'New Column',
-      item: [],
-    });
-  }
+  // addColumn() {
+  //   this.lists.push({
+  //     title: 'New Column',
+  //     cards: [],
+  //   });
+  // }
 
   openModal(item: Item) {
     this.dialog.open(Modal, {
