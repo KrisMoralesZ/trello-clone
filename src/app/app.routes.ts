@@ -7,6 +7,7 @@ import { PasswordReset } from '@pages/authentication/password-reset/password-res
 import { Recovery } from '@pages/authentication/recovery/recovery';
 import { Layout } from './layout/layout';
 import { authenticationGuard } from './guards/authentication-guard';
+import { loggedUserGuard } from './guards/logged-user-guard';
 
 export const routes: Routes = [
   {
@@ -16,18 +17,22 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [loggedUserGuard],
     component: Login,
   },
   {
     path: 'signup',
+    canActivate: [loggedUserGuard],
     component: Signup,
   },
   {
     path: 'reset-password',
+    canActivate: [loggedUserGuard],
     component: PasswordReset,
   },
   {
-    path: 'recover',
+    path: 'recovery',
+    canActivate: [loggedUserGuard],
     component: Recovery,
   },
   {
