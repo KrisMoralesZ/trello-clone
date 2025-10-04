@@ -52,7 +52,10 @@ export class Signup {
       this.status = 'loading';
       const { name, email, password } = this.form.getRawValue();
       this.authService.signUpAndLogin(name, email, password).subscribe({
-        next: () => {
+        next: (response) => {
+          if (response) {
+            this.authService.setToken(response.access_token);
+          }
           this.status = 'success';
           this.router.navigate(['/app/boards']);
         },

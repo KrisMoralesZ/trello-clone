@@ -5,6 +5,8 @@ import { Board } from './pages/board/board';
 import { Signup } from '@pages/authentication/signup/signup';
 import { PasswordReset } from '@pages/authentication/password-reset/password-reset';
 import { Recovery } from '@pages/authentication/recovery/recovery';
+import { Layout } from './layout/layout';
+import { authenticationGuard } from './guards/authentication-guard';
 
 export const routes: Routes = [
   {
@@ -29,11 +31,22 @@ export const routes: Routes = [
     component: Recovery,
   },
   {
-    path: 'boards',
-    component: Boards,
+    path: 'app',
+    component: Layout,
+    canActivate: [authenticationGuard],
+    children: [
+      {
+        path: 'boards',
+        component: Boards,
+      },
+      {
+        path: 'board',
+        component: Board,
+      },
+    ],
   },
   {
-    path: 'board',
-    component: Board,
+    path: '**',
+    redirectTo: 'login',
   },
 ];
