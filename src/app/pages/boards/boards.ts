@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {
@@ -13,6 +13,9 @@ import {
   faGear,
 } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
+import { BoardsService } from '@services/boards/boards-service';
+import { BoardsDataSource } from './BoardDataSource';
+import { IBoard } from '@models/boards.model';
 
 @Component({
   selector: 'app-boards',
@@ -20,6 +23,8 @@ import { faTrello } from '@fortawesome/free-brands-svg-icons';
   templateUrl: './boards.html',
 })
 export class Boards {
+  private boardsService = inject(BoardsService);
+
   faTrello = faTrello;
   faBox = faBox;
   faWaveSquare = faWaveSquare;
@@ -30,4 +35,28 @@ export class Boards {
   faBorderAll = faBorderAll;
   faUsers = faUsers;
   faGear = faGear;
+
+  dataSource = new BoardsDataSource();
+  boards: IBoard[] = [];
+
+  ngOnInit() {
+    this.getBoards();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filterData(filterValue.trim().toLowerCase());
+  }
+
+  getBoards() {
+    this.boardsService.getBoards().subscribe({
+      next: (boards) => {
+        this.boards = boards;
+        this.dataSource.setData(this.boards);
+      },
+      error: (err) => {
+        console.error('Error fetching boards:', err);
+      },
+    });
+  }
 }
