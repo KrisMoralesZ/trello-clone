@@ -1,4 +1,3 @@
-
 import { AuthService } from '@services/auth/auth-service';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -54,12 +53,16 @@ export class Login {
       this.authService
         .login(this.email.value as string, this.password.value as string)
         .subscribe({
-          next: () => {
+          next: (response) => {
+            if (response) {
+              this.authService.setToken(response.access_token);
+            }
             this.status = 'success';
-            this.router.navigate(['/app']);
+            this.router.navigate(['/app/boards']);
           },
-          error: () => {
+          error: (err) => {
             this.status = 'failed';
+            console.error('Login error:', err);
           },
         });
     } else {
