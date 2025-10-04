@@ -1,0 +1,134 @@
+<div class="w-screen h-screen bg-gray-50 sm:bg-gray-50 relative">
+  <div class="absolute w-full h-full hidden sm:block">
+    <img
+      loading="lazy"
+      class="absolute w-60 lg:w-96 left-0 bottom-0"
+      src="assets/svg/login-bg-left.svg"
+      alt="bg left"
+    />
+    <img
+      loading="lazy"
+      class="absolute w-60 lg:w-96 right-0 bottom-0"
+      src="assets/svg/login-bg-rigth.svg"
+      alt="bg right"
+    />
+  </div>
+  <div class="relative w-full sm:w-7/12 md:w-6/12 lg:w-4/12 m-auto">
+    <header class="pt-6 pb-2 flex justify-center">
+      <img
+        loading="lazy"
+        class="w-56"
+        src="assets/images/logo/logo-gradient-blue-trello.png"
+        alt="Logo"
+      />
+    </header>
+    <div class="bg-white rounded shadow-none sm:shadow-lg py-4 px-6 md:px-10">
+      <div class="mb-4">
+        <h1 class="text-center font-semibold pt-4 pb-8 text-gray-600">
+          Log In to Trello
+        </h1>
+        <form
+          [formGroup]="form"
+          novalidate
+          class="space-y-4"
+          (ngSubmit)="loginUser()"
+        >
+          <div>
+            <div class="relative">
+              <input
+                #nameInput
+                formControlName="email"
+                placeholder="Enter email"
+                type="email"
+                class="w-full rounded bg-gray-100 border-gray-300 border-2"
+              />
+              <button
+                type="button"
+                class="p-2 absolute right-2"
+                (click)="nameInput.focus()"
+              >
+                <fa-icon [icon]="faPen"></fa-icon>
+              </button>
+            </div>
+            @if (form.controls['email'].touched &&
+            form.controls['email'].invalid) {
+            <div>
+              @if (form.controls['email'].hasError('required')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                This field is mandatory
+              </p>
+              } @if (form.controls['email'].hasError('email')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                This field should be a email
+              </p>
+              }
+            </div>
+            }
+          </div>
+          <div>
+            <div class="relative">
+              <input
+                formControlName="password"
+                placeholder="Enter password"
+                [type]="showPassword ? 'text' : 'password'"
+                class="w-full rounded bg-gray-100 border-gray-300 border-2"
+              />
+              <button
+                type="button"
+                class="p-2 absolute right-2"
+                (click)="showPassword = !showPassword"
+              >
+                <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+              </button>
+            </div>
+            @if ( form.controls['password'].touched &&
+            form.controls['password'].invalid ) {
+            <div>
+              @if (form.controls['password'].hasError('required')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                This field is mandatory
+              </p>
+              } @if (form.controls['password'].hasError('minlength')) {
+              <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                This field should be greater than 6 characters
+              </p>
+              }
+            </div>
+            }
+          </div>
+          @if (status === 'failed') {
+          <div>
+            <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+              Credentials are invalid
+            </p>
+          </div>
+          }
+          <div>
+            <app-button typeBtn="submit" color="success">Login</app-button>
+          </div>
+        </form>
+        <hr class="my-4 border-b-1 border-r-gray-300" />
+        <div
+          class="flex justify-center items-center space-x-0 space-y-2 md:space-x-2 md:space-y-0 gap-"
+        >
+          <a href="/forgot-password" class="text-blue-600 font-light"
+            >Can't log in?</a
+          >
+          <span class="text-gray-500 hidden md:block">*</span>
+          <a href="/register" class="text-blue-600 font-light m-0"
+            >Sign up for an account</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="mt-10 border-b-1 border-r-gray-300" />
+    <div class="flex justify-center">
+      <img
+        loading="lazy"
+        class="w-32 mt-4"
+        src="assets/images/logo/logo-atlassian-gray.png"
+        alt="logo"
+      />
+    </div>
+  </div>
+</div>

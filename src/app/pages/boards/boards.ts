@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
@@ -19,7 +19,7 @@ import { Navbar } from '../../components/navbar/navbar';
 
 @Component({
   selector: 'app-boards',
-  imports: [CommonModule, Navbar, FontAwesomeModule, CdkAccordionModule],
+  imports: [Navbar, FontAwesomeModule, CdkAccordionModule],
   templateUrl: './boards.html',
 })
 export class Boards {
