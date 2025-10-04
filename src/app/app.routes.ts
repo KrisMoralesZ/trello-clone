@@ -3,6 +3,8 @@ import { Login } from '@pages/authentication/login/login';
 import { Boards } from './pages/boards/boards';
 import { Board } from './pages/board/board';
 import { Signup } from '@pages/authentication/signup/signup';
+import { PasswordReset } from '@pages/authentication/password-reset/password-reset';
+import { Recovery } from '@pages/authentication/recovery/recovery';
 
 export const routes: Routes = [
   {
@@ -17,6 +19,14 @@ export const routes: Routes = [
   {
     path: 'signup',
     component: Signup,
+  },
+  {
+    path: 'reset-password',
+    component: PasswordReset,
+  },
+  {
+    path: 'recover',
+    component: Recovery,
   },
   {
     path: 'boards',
