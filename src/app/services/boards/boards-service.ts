@@ -63,6 +63,15 @@ export class BoardsService {
     return onBottomPosition + this.bufferSpace;
   }
 
+  getPositionNewList(lists: IBoardDetails['lists']) {
+    if (!lists || lists.length === 0) {
+      return this.bufferSpace;
+    }
+    const lastIndex = lists.length - 1;
+    const onBottomPosition = lists[lastIndex].position ?? this.bufferSpace;
+    return onBottomPosition + this.bufferSpace;
+  }
+
   createBoard(title: string, backgroundColor: Colors) {
     const token = this.token;
     return this.http.post<IBoard>(
