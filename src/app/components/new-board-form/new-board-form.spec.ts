@@ -21,4 +21,24 @@ describe('NewBoardForm', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have default title as empty string', () => {
+    expect(component.form.get('title')?.value).toBe('');
+  });
+
+  it('should have default backgroundColor as sky', () => {
+    expect(component.form.get('backgroundColor')?.value).toBe('sky');
+  });
+
+  it('should mark title as invalid if empty', () => {
+    const titleControl = component.form.get('title');
+    titleControl?.setValue('');
+    expect(titleControl?.invalid).toBeFalse();
+  });
+
+  it('should mark title as valid if not empty', () => {
+    const titleControl = component.form.get('title');
+    titleControl?.setValue('New Board');
+    expect(titleControl?.valid).toBeTrue();
+  });
 });
