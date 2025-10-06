@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 import { NewBoardForm } from './new-board-form';
 
 describe('NewBoardForm', () => {
@@ -8,9 +9,9 @@ describe('NewBoardForm', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewBoardForm]
-    })
-    .compileComponents();
+      imports: [NewBoardForm, HttpClientTestingModule],
+      providers: [HttpClient],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NewBoardForm);
     component = fixture.componentInstance;
