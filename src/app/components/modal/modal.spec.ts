@@ -12,8 +12,6 @@ describe('Modal', () => {
   let fixture: ComponentFixture<Modal>;
   let dialogRefSpy: jasmine.SpyObj<DialogRef<{ response: boolean }>>;
 
-  const mockItem = { title: 'Test Task', description: 'This is a test task' };
-
   beforeEach(async () => {
     dialogRefSpy = jasmine.createSpyObj('DialogRef', ['close']);
 
@@ -23,7 +21,17 @@ describe('Modal', () => {
         AuthService,
         HttpClient,
         { provide: DialogRef, useValue: dialogRefSpy },
-        { provide: DIALOG_DATA, useValue: { item: mockItem } },
+        {
+          provide: DIALOG_DATA,
+          useValue: {
+            cardData: {
+              id: '1',
+              title: 'Test Task',
+              description: 'This is a test task',
+            },
+            listData: { id: 'list1', title: 'To Do' },
+          },
+        },
       ],
     }).compileComponents();
 
@@ -49,16 +57,16 @@ describe('Modal', () => {
     expect(dialogRefSpy.close).toHaveBeenCalledWith({ response: false });
   });
 
-  // it('should render action buttons (Members, Labels, Checklist, Dates)', () => {
-  //   const actionButtons = fixture.debugElement.queryAll(
-  //     By.css('.action-button')
-  //   );
-  //   expect(actionButtons.length).toBe(4);
-  //   expect(actionButtons[0].nativeElement.textContent).toContain('Members');
-  //   expect(actionButtons[1].nativeElement.textContent).toContain('Labels');
-  //   expect(actionButtons[2].nativeElement.textContent).toContain('Checklist');
-  //   expect(actionButtons[3].nativeElement.textContent).toContain('Dates');
-  // });
+  it('should render action buttons (Members, Labels, Checklist, Dates)', () => {
+    const actionButtons = fixture.debugElement.queryAll(
+      By.css('.action-button')
+    );
+    expect(actionButtons.length).toBe(4);
+    expect(actionButtons[0].nativeElement.textContent).toContain('Members');
+    expect(actionButtons[1].nativeElement.textContent).toContain('Labels');
+    expect(actionButtons[2].nativeElement.textContent).toContain('Checklist');
+    expect(actionButtons[3].nativeElement.textContent).toContain('Dates');
+  });
 
   it('should call closeModal with true when invoked directly', () => {
     component.closeModal(true);
