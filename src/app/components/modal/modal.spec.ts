@@ -1,27 +1,37 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { By } from '@angular/platform-browser';
 import { Modal } from './modal';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '@services/auth/auth-service';
+import { CommonModule } from '@angular/common';
 
 describe('Modal', () => {
   let component: Modal;
   let fixture: ComponentFixture<Modal>;
   let dialogRefSpy: jasmine.SpyObj<DialogRef<{ response: boolean }>>;
 
-  const mockItem = {
-    id: '1',
-    title: 'Test Task',
-    description: 'Some description',
-  };
-
   beforeEach(async () => {
     dialogRefSpy = jasmine.createSpyObj('DialogRef', ['close']);
 
     await TestBed.configureTestingModule({
-      imports: [Modal],
+      imports: [HttpClientTestingModule, CommonModule, Modal, DialogModule],
       providers: [
+        AuthService,
+        HttpClient,
         { provide: DialogRef, useValue: dialogRefSpy },
-        { provide: DIALOG_DATA, useValue: { item: mockItem } },
+        {
+          provide: DIALOG_DATA,
+          useValue: {
+            cardData: {
+              id: '1',
+              title: 'Test Task',
+              description: 'This is a test task',
+            },
+            listData: { id: 'list1', title: 'To Do' },
+          },
+        },
       ],
     }).compileComponents();
 
@@ -34,8 +44,8 @@ describe('Modal', () => {
     expect(component).toBeTruthy();
   });
   it('should display modal title from data', () => {
-    const title = fixture.debugElement.query(By.css('h3')).nativeElement;
-    expect(title.textContent).toContain(mockItem.title);
+    const titleEl = fixture.debugElement.query(By.css('.modal-title'));
+    expect(titleEl.nativeElement.textContent).toContain('Test Task');
   });
 
   it('should call closeModal() when close button is clicked', () => {
@@ -48,15 +58,14 @@ describe('Modal', () => {
   });
 
   it('should render action buttons (Members, Labels, Checklist, Dates)', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('app-button'));
-    const buttonTexts = buttons.map((btn) =>
-      btn.nativeElement.textContent.trim()
+    const actionButtons = fixture.debugElement.queryAll(
+      By.css('.action-button')
     );
-
-    expect(buttonTexts).toContain('Members');
-    expect(buttonTexts).toContain('Labels');
-    expect(buttonTexts).toContain('Checklist');
-    expect(buttonTexts).toContain('Dates');
+    expect(actionButtons.length).toBe(4);
+    expect(actionButtons[0].nativeElement.textContent).toContain('Members');
+    expect(actionButtons[1].nativeElement.textContent).toContain('Labels');
+    expect(actionButtons[2].nativeElement.textContent).toContain('Checklist');
+    expect(actionButtons[3].nativeElement.textContent).toContain('Dates');
   });
 
   it('should call closeModal with true when invoked directly', () => {
