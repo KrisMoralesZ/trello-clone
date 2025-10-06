@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { IBoard, IBoardDetails } from '@models/boards.model';
 import { Card } from '@models/cards.model';
+import { Colors } from '@models/colors.model';
 import { apiUrl } from '@services/apiUrsl';
 import { Observable } from 'rxjs';
 
@@ -51,5 +52,17 @@ export class BoardsService {
       return onBottomPosition + this.bufferSpace;
     }
     return 0;
+  }
+
+  createBoard(title: string, backgroundColor: Colors) {
+    const token = this.token;
+    return this.http.post<IBoard>(
+      `${this.apiUrl}/api/v1/boards`,
+      {
+        title,
+        backgroundColor,
+      },
+      { headers: { Authorization: `Bearer ${token}` || '' } }
+    );
   }
 }
