@@ -7,8 +7,10 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { Card, IBoardDetails, List } from '@models/boards.model';
+import { IBoardDetails } from '@models/boards.model';
+import { Card } from '@models/cards.model';
 import { BoardsService } from '@services/boards/boards-service';
+import { CardsService } from '@services/cards/cards-service';
 import { Modal } from '../../components/modal/modal';
 
 @Component({
@@ -19,6 +21,7 @@ import { Modal } from '../../components/modal/modal';
 export class Board {
   private dialog = inject(Dialog);
   private boardsService = inject(BoardsService);
+  private cardsService = inject(CardsService);
   private route = inject(ActivatedRoute);
 
   board: IBoardDetails | null = null;
@@ -55,6 +58,22 @@ export class Board {
         event.currentIndex
       );
     }
+
+    const position = this.boardsService.getPosition(
+      event.container.data,
+      event.currentIndex
+    );
+    const card = event.container.data[event.currentIndex];
+    const listId = Number(event.container.id);
+    this.updateCard(card, position, listId);
+  }
+
+  private updateCard(card: Card, position: number, listId: number | string) {
+    this.cardsService
+      .update(card.id, { position, listId })
+      .subscribe((updatedCard) => {
+        console.log('Card updated:', updatedCard);
+      });
   }
 
   // addColumn() {
@@ -78,6 +97,5 @@ export class Board {
           : undefined,
       },
     });
-    console.log(cardData);
   }
 }
