@@ -54,6 +54,15 @@ export class BoardsService {
     return 0;
   }
 
+  getPositionNewCard(cards: Card[]) {
+    if (cards.length === 0) {
+      return this.bufferSpace;
+    }
+    const lastIndex = cards.length - 1;
+    const onBottomPosition = cards[lastIndex].position ?? this.bufferSpace;
+    return onBottomPosition + this.bufferSpace;
+  }
+
   createBoard(title: string, backgroundColor: Colors) {
     const token = this.token;
     return this.http.post<IBoard>(

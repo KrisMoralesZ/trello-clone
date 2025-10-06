@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Card, UpdateCardDto } from '@models/cards.model';
+import { Card, CreateCardDto, UpdateCardDto } from '@models/cards.model';
 import { apiUrl } from '@services/apiUrsl';
 
 @Injectable({
@@ -13,6 +13,13 @@ export class CardsService {
   private token = localStorage.getItem(this.TOKEN_KEY)
     ? localStorage.getItem(this.TOKEN_KEY)
     : '';
+
+  createCard(card: CreateCardDto) {
+    const token = this.token;
+    return this.http.post<Card>(`${this.apiUrl}/api/v1/cards`, card, {
+      headers: { Authorization: `Bearer ${token}` || '' },
+    });
+  }
 
   update(id: Card['id'], changes: UpdateCardDto) {
     const token = this.token;
