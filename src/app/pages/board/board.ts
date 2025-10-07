@@ -13,6 +13,7 @@ import { Card } from '@models/cards.model';
 import { List } from '@models/lists.model';
 import { BoardsService } from '@services/boards/boards-service';
 import { CardsService } from '@services/cards/cards-service';
+import { ListsService } from '@services/lists/lists-service';
 import { Modal } from '../../components/modal/modal';
 import { Button } from '@components/button/button';
 import {
@@ -37,12 +38,19 @@ export class Board {
   private dialog = inject(Dialog);
   private boardsService = inject(BoardsService);
   private cardsService = inject(CardsService);
+  private listsService = inject(ListsService);
   private route = inject(ActivatedRoute);
-  private formBuilder = inject(FormBuilder);
 
   board: IBoardDetails | null = null;
   cardData: Card | null = null;
+  showListForm = false;
+
   inputCard = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
+
+  inputList = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],
   });
@@ -61,6 +69,39 @@ export class Board {
       this.board = board;
       console.log('Fetched board:', this.board);
     });
+  }
+
+  openListForm() {
+    this.showListForm = true;
+  }
+
+  closeListForm() {
+    this.showListForm = false;
+    this.inputList.setValue('');
+  }
+
+  createNewList() {
+    if (this.board && this.inputList.valid) {
+      this.listsService
+        .createList({
+          title: this.inputList.value,
+          boardId: this.board.id,
+          position: this.boardsService.getPositionNewList(this.board.lists),
+        })
+        .subscribe((list) => {
+          if (this.board?.lists) {
+            this.board.lists.push({
+              ...list,
+              cards: [],
+            });
+          }
+          this.showListForm = false;
+          this.inputList.setValue('');
+        });
+      this.closeListForm();
+    } else {
+      console.error('Invalid list input or board not found');
+    }
   }
 
   openCardForm(list: List) {
