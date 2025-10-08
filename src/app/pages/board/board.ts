@@ -22,6 +22,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { BACKGROUNDS } from '@models/colors.model';
 
 @Component({
   selector: 'app-board',
@@ -62,6 +63,11 @@ export class Board {
     } else {
       console.error('Invalid board ID');
     }
+  }
+
+  get backgroundClasses() {
+    if (!this.board?.backgroundColor) return {};
+    return BACKGROUNDS[this.board.backgroundColor] || {};
   }
 
   getBoard(id: number) {

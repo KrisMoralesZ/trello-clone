@@ -1,8 +1,5 @@
 <div class="flex flex-col h-screen overflow-scroll">
-  <div
-    class="w-full grow px-4 pb-4"
-    [ngStyle]="{ backgroundColor: board?.backgroundColor }"
-  >
+  <div class="w-full grow px-4 pb-4" [ngClass]="backgroundClasses">
     <div class="flex flex-col h-full">
       <div>
         <h2 class="text-xl font-bold text-white my-4">{{ board?.title }}</h2>
@@ -12,7 +9,9 @@
         cdkDropListGroup
       >
         @for (list of board?.lists; track list.id) {
-        <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0">
+        <div
+          class="rounded bg-gradient-to-br from-gray-400 via-gray-300 to-gray-200 w-72 p-2 mr-3 shrink-0"
+        >
           <div class="flex justify-between py-1">
             <h3 class="text-sm font-bold ml-2">{{ list.title }}</h3>
           </div>
@@ -35,7 +34,7 @@
           </div>
           <div class="mt-5">
             @if (!list.showCardForm) {
-            <app-button color="light" (click)="openCardForm(list)"
+            <app-button color="sky" (click)="openCardForm(list)"
               >Add Card</app-button
             >
             } @if (list.showCardForm) {
@@ -45,10 +44,10 @@
                 class="w-full border-2 rounded p-2 mb-2"
               ></textarea>
               <div class="flex space-x-2 justify-between">
-                <app-button color="success" (click)="createCard(list)"
+                <app-button color="sky" (click)="createCard(list)"
                   >Create</app-button
                 >
-                <app-button color="light" (click)="closeCardForm(list)"
+                <app-button color="red" (click)="closeCardForm(list)"
                   >Close</app-button
                 >
               </div>
@@ -63,7 +62,7 @@
           </app-button>
         </div>
         } @if(showListForm){
-        <div class="">
+        <div class="border-2 rounded bg-gray-200 w-72 p-2 mr-3 shrink-0">
           <input
             type="text"
             placeholder="Enter list title..."
