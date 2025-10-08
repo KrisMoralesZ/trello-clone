@@ -11,6 +11,7 @@ export class Button {
   @Input() typeButton: 'button' | 'reset' | 'submit' = 'button';
   @Input() loading = false;
   @Input() color: Colors = 'primary';
+  @Input() disabled = false;
 
   private mapColors = COLORS;
 
