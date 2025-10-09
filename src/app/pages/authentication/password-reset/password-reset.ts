@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLinkWithHref } from '@angular/router';
 import { Button } from '@components/button/button';
 import { RequestStatus } from '@models/status.model';
 import { AuthService } from '@services/auth/auth-service';
 
 @Component({
   selector: 'app-password-reset',
-  imports: [Button, ReactiveFormsModule],
+  imports: [CommonModule, Button, ReactiveFormsModule, RouterLinkWithHref],
   templateUrl: './password-reset.html',
 })
 export class PasswordReset {
@@ -37,10 +39,12 @@ export class PasswordReset {
           this.emailSent = true;
         },
         error: () => {
+          console.log('Error sending recovery email');
           this.status = 'failed';
         },
       });
     } else {
+      console.log('Form is invalid');
       this.form.markAllAsTouched();
     }
   }

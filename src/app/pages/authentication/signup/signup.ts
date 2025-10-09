@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { RequestStatus } from '@models/status.model';
 import { AuthService } from '@services/auth/auth-service';
 import { faPen, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +11,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-signup',
-  imports: [Button, ReactiveFormsModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    Button,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    RouterLinkWithHref,
+  ],
   templateUrl: './signup.html',
 })
 export class Signup {
